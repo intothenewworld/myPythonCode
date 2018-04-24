@@ -1,0 +1,88 @@
+MVC: model(模型)-view(视图)-controller(控制器)所有框架的实现模式mvc
+mvc模式：强制的使应用程序的输入，处理和输出分开
+核心思想：解耦
+优点：降低各个模块的耦合性，方便变更，更容易重构代码，最大程度复用代码
+Django
+MVT：具体的实现
+M. model
+V. view
+T. Template
+
+1. 下载安装虚拟环境模块
+    pip install virtualenv
+2.  创建一个虚拟环境
+    virtualenv --no-site-packages +要创建的虚拟环境所在文件夹
+3.  进入虚拟环境，并且安装django
+    pip install django==1.11(安装1.11版本)
+4.  查看是否安装成功
+    import django
+    django.get_version（）
+    返回django版本则表示安装成功
+5.  创建第一个django项目
+    django-admin.py startproject +app1
+
+6. 启动django项目 
+    python manage.py runserver 8888
+
+7. 创建app
+    python manage.py startapp appa
+
+8. appa文件夹
+    __init__.py: 初始化，配置pymysql链接的地方
+    admin.py 管理后台注册模型
+    apps.py： setting.py里面注册app的时候用到，一般不推荐
+    models.py：  定义数据库模型，写模型的地方
+    test.py： 写测试方法，脚本的地方
+    views.py： 写业务处理的逻辑的地方
+    setting.py： 配置信息位置，databases等
+    urls.py: url路由
+    wsgi.py：网关
+
+9.  __init__.py: 初始化，配置pymysql链接的地方
+
+10.  模型
+    在models.py中定义class模型的名称
+    继承models.Model
+    db_table:定义数据库中的表名称
+
+11. 迁移数据库
+    python manage.py makemigrations
+    python manage.py migrate
+    
+12. 保存数据
+    stu = Student（）
+    stu.sex = 1
+    stu.name = '张山'
+
+13. 创建超级管理员账号密码
+    python manage.py createsuperuser
+
+14. ORM 对象关系映射
+
+15. 模型字段
+    CharField（5）：字符串长度5
+    BooleanField：布尔型
+    DateField（）：日期年月日
+    DateTimeField:年月日 时分秒
+    auto_now_add
+    auto_now
+
+    AutoField: 自动增长
+    # AutoField： 自动增长
+    # max_digits最大长度，decimal_digits小数点后几位
+    # models.DecimalField(max_digits=3, decimal_digits=1)
+
+    # TextField：存文本信息，图片长字符串
+    # IntegerField ：整数
+    # models.FloatField: 浮点数
+
+    # models.FileField(): 文件信息上传字段
+    # models.ImageField(upload_to='/xx/xxx/xx.png'图片上传的路径 )
+
+16. 模型参数(约束条件)
+    default：默认
+    null：设置是否为空，针对数据库该字段是否可以为空
+    blank：设置是否为空，正对表单提交该字段是否可以为空
+    unique：唯一
+    primary-key：创建主键
+
