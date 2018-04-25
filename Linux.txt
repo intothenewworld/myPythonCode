@@ -1,0 +1,154 @@
+﻿Linux
+查看进程：ps                  - process state
+新增用户：adduser + 用户名
+修改/新增密码：passwd + 用户名
+（只有root才能指定用户名，普通用户不能指定用户名直接passwd就可以修改密码）
+切换用户：su                  - switch user
+显示连接用户：who/who am i/w
+历史命令：history
+执行历史命令：！+ 历史编号（！和历史编号之间没有空格）
+查看当前工作路径：pwd         - print working directory
+切换目录：cd - change directory
+列出当前目录下的文件：ls      - list directory contents
+列出当前目录下的文件（含隐藏文件）：ls -a
+以长格式列出当前目录下的文件：ls -l 或 ll
+以长格式列出当前目录下的文件（含隐藏文件）:ls -la 或ls -l -a
+注：长格式中:‘r - read读  w - write写  x - execute执行’
+
+回到当前用户主目录：cd ~
+以.开头的文件或文件夹为隐藏文件
+查看文件里面的内容：cat + 文件名
+
+查看命令手册（manual）：man + 命令
+查看命令详细信息(information)：info + 命令
+查看命令简略帮助信息：命令 + --help
+（--help|less 或--help|more   一页页的显示）
+
+创建空文件：touch +文件名
+删除文件：rm + 文件名
+强制删除文件：rm -f +文件名
+
+创建文件夹： mkdir + 文件名
+删除空文件夹： rmdir + 文件名
+强制删除文件夹： rm -rf + 文件名
+
+回声命令：echo
+拷贝：cp +文件名 a/修改后文件名（不写则默认不改文件名）
+剪切/改名字：mv +文件名 a/修改文件名（不写则默认不改文件名）
+往文件内写入内容: echo '内容' > 文件名
+比较两个文件内的内容，找出不同：diff A文件名 B文件名
+
+字符统计，查出文件内字符数量：wc +文件名     
+结果（行数，单词数，字符数（含末尾光标））
+字符统计，查出文件内指定字符数量：wc -字符 +文件名
+检查文件类型：file + 文件名
+
+联网：wget +域名
+联网下载指定文件名：wget +域名  -O +文件名
+yum remove + 文件名 卸载
+查找文件内指定内容：cat +文件名|grep +内容
+文件内容去重：uniq [-cdu][-f<栏位>][-s<字符位置>][-w<字符位置>][--help][--version][输入文件][输出文件]
+	      uniq +文件名  去除文件内的重复内容
+文件内容排序：sort [-bcdfimMnr][-o<输出文件>][-t<分隔字符>][+<起始栏位>-<结束栏位>][--help][--verison][文件]
+	      sort +文件名  文件内的重复排序
+
+压缩：gzip +文件名
+解压缩：gunzip +文件名
+一起归档：tar -cvf 指定文件名  +需归档文件名(*.txt即所有的txt格式文件）
+解档： tar -xvf 指定文件名
+
+命令所在路径：which + 命令
+查看所有包含文件名的所在路径：whereis +文件名
+日历：cal +年份
+
+录制脚本（记录操作）：script +文件名（默认为typescript）
+（退出：exit）
+
+同一Linux不同用户相互之间可以发信息：write +用户名
+可以直接发送警告：wall +内容 （所有用户都可以收到） 
+
+杀掉进程：kill +进程号
+强制杀掉进程：kill -9 +进程号
+
+新增/修改当前用户权限：chmod u+x +文件名
+(x:执行；r:读；w：写)
+去掉当前用户权限： chmod u-x +文件名 u（you：当前用户）
+同组用户增加权限：chmod g+x +文件名  g(group:同组用户)
+其他用户增加权限：chmod o+x +文件名  o(other: 其它用户）
+
+所有用户修改权限为可读可写可执行：chmod 777 +文件名
+（-rwxrwxrwx    当前用户、同组用户、其他用户  二进制：111 111 111 也就是777）
+执行文件：./文件名
+
+python2中可读汉字（页首写）：#_*_ coding:utf-8 _*_
+
+移除软件：remove
+查进程：ps -aux 或ps -ef 
+列出安装的软件：yum list installed
+
+centos 7 防火墙：firewalld
+查看防火墙状态：firewall-cmd --state
+停止防火墙：systemctl stop firewalld
+系统控制(centos7): systemctl
+重启防火墙：firewall-cmd --reload
+
+
+那怎么开启一个端口呢
+添加
+firewall-cmd --zone=public --add-port=80/tcp --permanent    （--permanent永久生效，没有此参数重启后失效）
+重新载入
+firewall-cmd --reload
+查看
+firewall-cmd --zone= public --query-port=80/tcp
+删除
+firewall-cmd --zone= public --remove-port=80/tcp --permanent
+（其它低版本：servies）
+
+systemctl enable mariadb(开机自启)
+systemctl disable mariadb(取消开机自启)
+
+MySQL
+yum install mariadb-server mariadb (安装mysql)
+systemctl start mariadb (启服务器)
+yum list installed | grep mariadb
+（可以查看是否下载了mariadb）
+
+ln + 文件名  (创建符号链接)
+（硬链接， 相当于做了备份）
+（相当于创建了另一个引用来引用这个文件，删掉其中一个还有另一个
+引用与之对应）
+soft + 文件名 + 修改的文件名
+（软链接，相当于给文件创建一个快捷方式）
+
+进入MySQL
+mysql -u root -p (链接本地的mysql服务器)
+mysql -h + ip地址 -u root -p (链接别人的mysql服务器)
+MySQL中命令：
+在MySQL中每个命令末尾+;
+show databases;
+use mysql;
+show tables;
+select user, host, password from user;
+update user set host='%' where host='本地主机' and user='root';
+（更新mysql用户名是root的主机（host）改为%）
+
+网络相关的命令
+ifconfig()
+ip address(查看地址)
+ping + 域名（或IP地址）检查网络可达性
+ping to death
+DDoS = Distributed Deny of Service 分布式拒绝服务攻击
+netstat -nap (可以查看到网络和端口情况) ！important
+netstat -nap > result.txt
+(大于号是重定像可以把命令所显示的内容可以写到result.txt里)
+ssh root@+地址 （可以链接别人的）
+scp(可以实现网络拷贝)
+
+配置环境变量命令：
+vim .bash_profile
+echo $PATH
+source .bash_profile
+
+
+
+
